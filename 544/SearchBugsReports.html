@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <script type='text/javascript'>
+            function setDropDown(str)
+            {
+                var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState === 4) 
+            {
+                var tmp = new Array();
+                tmp = xmlhttp.responseText.split(",");  
+                var selecter = document.getElementById(str);   
+                /* Load dropdown with new list of names */
+                for(var i = 0; i < tmp.length; i++) 
+                {
+                    var opt = tmp[i];
+                    var el = document.createElement("option");
+                    el.textContent = opt;
+                    el.value = opt;
+                    selecter.appendChild(el);
+                }
+            }
+        }
+        
+        xmlhttp.open("GET", "http://localhost/544/getColumnfromTable.php?name=" + str, true);
+        xmlhttp.send();
+            }
+        </script>
+        <script type='text/javascript'>
+            function init()
+            {
+                setDropDown("Program");
+                setDropDown("ReportType");
+                setDropDown("Severe");
+                setDropDown("Reporter");
+                setDropDown("B_Date");
+                setDropDown("Status");
+            }
+        </script>
+        <h1>Search bug reports:</h1>
+        <label>Program Name:</label><select name='Program' id='Program'></select><input type='button'/><br>
+        <label>Report type~~:</label><select name='ReportType' id='ReportType'></select><input type='button'/><br>
+        <label>Severity~~~~:</label><select name='Severe' id='Severe'></select><input type='button'/><br>
+        <label>Reporter~~~~:</label><select name='Reporter' id='Reporter'></select><input type='button'/><br>
+        <label>Date~~~~~~~:</label><select name='B_Date ' id='B_Date'></select><input type='button'/><br>
+        <label>Status~~~~~~:</label><select name='Status' id='Status'></select><input type='button'/><br>
+        <label>Priority~~~~:</label><select name='Priority' id='Priority'></select><input type='button'/><br>
+<!--        <label>Severity~~~~:</label><select name='Sev_select' id='Sev_select'></select><input type='button'/>
+        <label>Reporter~~~~:</label><select name='Reporter' id='Reporter'></select><input type='button'/>
+        <label>Date~~~~~~~~:</label><select name='Sev_select' id='Sev_select'></select><input type='button'/>-->
+        
+        
+    </body>
+</html>
